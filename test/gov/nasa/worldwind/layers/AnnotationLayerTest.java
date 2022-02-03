@@ -162,6 +162,43 @@ public class AnnotationLayerTest
         // Test that the layer contains the annotations.
         assertEquals("", annotations, layer.getAnnotations());
     }
+    
+    // Student-added Test Case 7 
+    @Test
+    public void testSetClearSetAnnotations()
+    {
+        Iterable<Annotation> annotations = createExampleIterable();
+
+        AnnotationLayer layer = new AnnotationLayer();
+        layer.addAnnotations(annotations);
+        layer.setAnnotations(annotations);
+        layer.setAnnotations(null);
+        layer.setAnnotations(annotations);
+
+        // Test that the layer points to the Iterable.
+        assertSame("", annotations, layer.getAnnotations());
+        // Test that the layer contains the annotations.
+        assertEquals("", annotations, layer.getAnnotations());
+    }
+    
+    // Student-added Test Case 8
+    @Test
+    public void testSetClearAddAnnotations()
+    {
+        Iterable<Annotation> annotations = createExampleIterable();
+
+        AnnotationLayer layer = new AnnotationLayer();
+        layer.addAnnotations(annotations);
+        layer.setAnnotations(annotations);
+        layer.setAnnotations(null);
+        layer.addAnnotations(annotations);
+
+
+        // Test that the layer does not point to the Iterable.
+        assertNotSame("", annotations, layer.getAnnotations());
+        // Test that the layer contains no annotations.
+        assertEquals("", annotations, layer.getAnnotations());
+    }
 
     @Test
     public void testMaliciousGetAnnotations()
