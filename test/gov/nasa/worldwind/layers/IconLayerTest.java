@@ -132,6 +132,36 @@ public class IconLayerTest
     //////////////////////////////////////////////////////////
 
     @Test
+    public void testIconFiniteModel()
+    {
+        Iterable<WWIcon> icons = createExampleIterable();
+        WWIcon icon =  new UserFacingIcon("", Position.ZERO);
+
+        IconLayer layer = new IconLayer();
+        // Check that we are in the 0 Icons state
+        assertNull(layer.getIcons());
+
+        // Add single custom icon
+        layer.addIcon(icon);
+        // layer now has > 0 icons
+        assertNotNull(layer.getIcons());
+
+        layer.removeIcon(icon);
+        // Back to 0 Icons state
+        assertNull(layer.getIcons());
+
+        // Load a set of icons
+        layer.setIcons(icons);
+        // Icons are loaded as a set
+        assertNotNull(layer.getIcons());
+
+        // Clears set icons
+        layer.setIcons(null);
+        // Back to 0 Icons state
+        assertNull(layer.getIcons());
+    }
+
+    @Test
     public void testSetIconsClearsIcons()
     {
         Iterable<WWIcon> icons = createExampleIterable();
