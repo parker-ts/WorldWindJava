@@ -27,6 +27,8 @@
  */
 package gov.nasa.worldwind.render;
 
+import gov.nasa.worldwind.drag.DragContext;
+import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.Position;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -132,6 +134,112 @@ public class UserFacingIconTest
 
         assertIconEquals(expected, icon);
     }
+
+    // Student Added Tests
+    @Test
+    public void testMovePosition_NotNull() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        Position pos2 = new Position(Angle.fromDegreesLatitude(119.4179),
+                Angle.fromDegreesLongitude(36.7783), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+        icon.move(pos2);
+        assertNotNull(icon.getPosition());
+    }
+
+    @Test
+    public void testMoveToPosition_NotNull() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        Position pos2 = new Position(Angle.fromDegreesLatitude(119.4179),
+                Angle.fromDegreesLongitude(36.7783), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+        icon.moveTo(pos2);
+        assertNotNull(icon.getPosition());
+    }
+
+    @Test
+    public void testDrag_NotNull() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+
+        DragContext con = new DragContext();
+        icon.setDragEnabled(true);
+        icon.drag(con);
+
+        assertTrue(icon.isDragEnabled());
+    }
+
+    @Test
+    public void testGetSetBackGroundImage() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+
+        icon.setBackgroundImage("src/images/16x16-icon-earth.png");
+        icon.setBackgroundScale(10.152);
+
+        assertNotNull(icon.getBackgroundImage());
+    }
+
+    @Test
+    public void testBadRestorableState() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+
+        icon.restoreState("");
+        assertNull(icon.getRestorableState());
+    }
+
+    @Test
+    public void testGetIconPath() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+        assertNull(icon.getPath());
+    }
+
+    @Test
+    public void testGetImageSource() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+        assertNull(icon.getImageSource());
+    }
+
+    @Test
+    public void testGetImageTexture() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+        assertNull(icon.getImageTexture());
+    }
+
+    @Test
+    public void testIconImageConstructor() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        Object img = "src/images/16x16-icon-earth.png";
+        UserFacingIcon icon = new UserFacingIcon(img, pos1);
+
+        assertNotNull(icon);
+    }
+
+    @Test
+    public void testTooltipText() {
+        Position pos1 = new Position(Angle.fromDegreesLatitude(36.7783),
+                Angle.fromDegreesLongitude(119.4179), 0);
+        UserFacingIcon icon = new UserFacingIcon("", pos1);
+        Color c = new Color(50, 168, 82);
+        icon.setToolTipText("test text");
+        icon.setToolTipTextColor(c);
+
+        assertNotNull(icon.getToolTipText());
+        assertNotNull(icon.getToolTipTextColor());
+    }
+
 
     //////////////////////////////////////////////////////////
     // Helper Methods
