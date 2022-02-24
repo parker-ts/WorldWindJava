@@ -4,7 +4,7 @@
 # Set up to run the Java build script per the Travis CI documentation
 language: java
 
-# Configure the build to use Oracle JDK 9
+# Configure build to use Oracle JDK 9
 jdk:
   - openjdk11
 
